@@ -1,0 +1,108 @@
+<p>##线程池的优点</p>
+<ul>
+  <li>线程池中的线程可以重用，减少线程创建、销毁带来的系统开销；</li>
+  <li>控制线程池的最大并发量，避免相互抢占系统资源而导致阻塞；</li>
+  <li>对线程进行简单管理，提供定时执行，以及指定间隔循环执行；</li>
+</ul>
+
+<p>##ThreadPoolExecutor构造方法</p>
+
+<pre><code class="language-Java">public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue&lt;Runnable&gt; workQueue,
+                          ThreadFactory threadFactory)
+</code></pre>
+
+<p>参数说明：</p>
+<ul>
+  <li>corePoolSize
+    <blockquote>
+      <p>线程池的核心数</p>
+    </blockquote>
+  </li>
+  <li>maximumPoolSize
+    <blockquote>
+      <p>线程池能容纳的最大线程数</p>
+    </blockquote>
+  </li>
+  <li>keepAliveTime
+    <blockquote>
+      <p>非核心线程闲置时间的超时时长，超过这个时长，非核心线程就会被回收。ThreadPoolExecutor的allowCoreThreadTimeOut属性为true，keepAliveTime同样会作用于核心线程。</p>
+    </blockquote>
+  </li>
+  <li>unit
+    <blockquote>
+      <p>超时时长的单位，常用的有TimeUnit.MILISECONDS\TimeUnit.SECONDS\TimeUnit.MINUTES等</p>
+    </blockquote>
+  </li>
+  <li>workQueue
+    <blockquote>
+      <p>线程池中的任务队列，通过线程池的execute方法提交Runnerable对象会存储在这个参数中</p>
+    </blockquote>
+  </li>
+  <li>threadFactory
+    <blockquote>
+      <p>线程工厂</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>##ThreadPoolExecutor执行任务的规则
+设：nThreadNow: 为当前线程数量;
+   nCore: 核心线程数量;
+   nPoolMax: 线程池最大值</p>
+
+<ol>
+  <li>nThreadNow &lt; nCore, 启动一个核心线程来执行任务;</li>
+  <li>nThreadNow &gt;= nCore &amp;&amp; 工作队列未满, 将任务插入到工作队列;</li>
+  <li>工作队列已满 &amp;&amp; nThreadNow &lt; nPoolMax, 立即启动一个非核心线程来执行任务;</li>
+  <li>nThreadNow &gt;= nPoolMax, 拒绝执行此任务</li>
+</ol>
+
+<p>##线程池的分类
+Android中有四种常见的线程池：</p>
+
+<ol>
+  <li>FixedThreadPool
+    <blockquote>
+      <ul>
+        <li>线程数量固定</li>
+        <li>当线程处于空闲状态时，不会被回收</li>
+        <li>当所有的线程处于活动状态时，新任务都会处于等待状态，直到有线程空闲出来</li>
+        <li>只有<font color="black">**核心**</font>线程</li>
+        <li>没有超时机制</li>
+        <li>任务队列没有大小限制</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>CachedThreadPool 适用于执行大量耗时较少的任务
+    <blockquote>
+      <ul>
+        <li>线程数量不固定</li>
+        <li>只有<font color="black">**非核心**</font>线程</li>
+        <li>线程池中的线程都处于活动状态，新建线程来处理新任务；否则利用空闲线程处理新任务</li>
+        <li>空闲线程都有超时机制</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>ScheduledThreadPool 适用于执行定时任务、具有固定周期的重复任务
+    <blockquote>
+      <ul>
+        <li>核心线程数量固定</li>
+        <li>非核心线程数没有限制</li>
+        <li>非核心线程闲置时会被立即回收</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>SingleThreadPool
+    <blockquote>
+      <ul>
+        <li>内部只有一个核心线程</li>
+        <li>确保所有任务都在同一个线程中按顺序执行</li>
+      </ul>
+    </blockquote>
+  </li>
+</ol>
+
