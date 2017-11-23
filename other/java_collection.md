@@ -1,0 +1,25 @@
+- Collection
+    - List
+        - AbstractList
+            - AbstractSequentialList
+                - LinkedList
+                - ArrayList 初始capacity = 10, 扩容策略为每次增加一半
+                - Vector 线程安全
+                    - Stack
+    - Set 不能有重复项
+        - SortedSet 有序
+            - NavigableSet
+        - AbstractSet
+            - HashSet 基于HashMap实现
+            - TreeSet 基于TreeMap实现
+    - Queue
+        -Deque 双端队列
+- Map
+    - SortedMap
+        - NavigableMap
+            - TreeMap
+    - AbastractMap
+        - HashMap 基于数组+链表实现；扩容策略为2的幂
+        - WeakHashMap
+        - TreeMap
+    - HashTable 继承与Dictionary，并实现了Map；线程安全；使用Enumeration进行遍历；扩容策略为*2+1

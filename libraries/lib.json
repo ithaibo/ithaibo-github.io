@@ -1,0 +1,52 @@
+{
+    "description":"This is a set of libraries collected. It's userful.",
+    "libraryArray":[
+        {
+            "type" : "Android",
+            "content":[
+                {
+                    "RxJava-Android-Samples":"https://github.com/kaushikgopal/RxJava-Android-Samples",
+                    "LearningNotes":"https://github.com/GeniusVJR/LearningNotes",
+                    "AndroidAnimations":{
+                        "href":"https://github.com/daimajia/AndroidViewAnimations",
+                        "desc":"Android动画实例"
+                    }
+                }
+            ]
+        },
+        {
+            "type" : "Java",
+            "content":[
+
+            ]
+        },
+        {
+            "type" : "React",
+            "content":[
+
+            ]
+        },
+        {
+            "type" : "ReactNative",
+            "content":[
+
+            ]
+        },
+        {
+            "type" : "node.js",
+            "content":[
+                {
+                    "如何系统地学习Node.js":"https://www.zhihu.com/question/21567720"
+                }
+            ]
+        },
+        {
+            "type" : "ES6",
+            "content":[
+                {
+                    "ES6入门教程":"https://github.com/ruanyf/es6tutorial"
+                }
+            ]
+        }
+    ]
+}

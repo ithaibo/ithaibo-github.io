@@ -1,0 +1,21 @@
+java.lang.NullPointerException
+Attempt to read from field 'java.lang.Runnable android.databinding.ViewDataBinding.mRebindRunnable' on a null object reference
+1 android.databinding.ViewDataBinding.access$100(Unknown Source)
+2 android.databinding.z.onViewAttachedToWindow(Unknown Source)
+3 android.view.View.dispatchAttachedToWindow(View.java:15412)
+4 android.view.ViewGroup.dispatchAttachedToWindow(ViewGroup.java:2953)
+5 android.view.ViewGroup.addViewInner(ViewGroup.java:4493)
+6 android.view.ViewGroup.addViewInLayout(ViewGroup.java:4430)
+7 android.widget.ListView.setupChild(ListView.java:2023)
+8 android.widget.ListView.makeAndAddView(ListView.java:1975)
+9 android.widget.ListView.fillUp(ListView.java:738)
+10 android.widget.ListView.fillGap(ListView.java:677)
+
+
+
+this errors occurs when you change the tag (i.e. view.setTag(object)) of a data-binding enabled view, as the data binding library uses the tag for itself.[https://stackoverflow.com/questions/37374303/app-crash-caused-by-data-binding-related-to-java-lang-runnable-android-databindi]
+
+在ListView的Adapter中使用DataBinding时，不再使用viewHolder.setTag, 同时这个时候ViewHolder也没有存在的意义
+------------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,3 @@
+# Activity Launch Mode
+
+wait for input...
