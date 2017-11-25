@@ -17,6 +17,7 @@ Documents, Blogs, Books
    - build
      - [依赖版本统一](/android/build/version-dependencies.md)
      - [gradle配置](/android/build/gradle-config.md)
+     - [Debug版本统一](android/build/debug-version.md)
    - databinding
      - [DataBinding](android/databinding/AndroidDataBinding.md)
    - framework
