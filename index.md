@@ -42,12 +42,13 @@ Documents, Blogs, Books
  - java
    - Algorithms4thEdtionNotes
      - [Fundamentals](java/Algorithms4thEdtionNotes/1-Fundamentals.md)
+   - Concurrency
+     - [并发基础](java/concurrency/java_concurrency.md)
    - NIO
      - [NIO](java/NIO/Java_NIO.md)
-   - Thread
-     - [Java多线程](java/multithread/Java多线程.md)
    - encrypt
      - [Java常用加密算法](java/encrypt/Java常用加密算法.md)
    - [Java书单](java/Java书单.xlsx)
+   - [Java集合类](java/collection/java_collection.md)
  - libraries
    - [lib.json](libraries/lib.json)
