@@ -40,6 +40,8 @@ Documents, Blogs, Books
      - [View滑动冲突](android/view/View滑动冲突.md)
      - [View基础](android/view/View基础.md)
      - [View事件的分发机制](android/view/View事件的分发机制.md)
+   - Serialization
+     - [序列化](android/ipc/序列化.md)
  - java
    - Algorithms4thEdtionNotes
      - [Fundamentals](java/Algorithms4thEdtionNotes/1-Fundamentals.md)
