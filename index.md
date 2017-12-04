@@ -42,6 +42,11 @@ Documents, Blogs, Books
      - [View事件的分发机制](android/view/View事件的分发机制.md)
    - Serialization
      - [序列化](android/ipc/序列化.md)
+   - IPC
+     - [ipc](android/ipc/ipc.md)
+     - [AIDL](android/ipc/aidl.md)
+     - [Messenger](android/ipc/messenger.md)
+     
  - java
    - Algorithms4thEdtionNotes
      - [Fundamentals](java/Algorithms4thEdtionNotes/1-Fundamentals.md)
