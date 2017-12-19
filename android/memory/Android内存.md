@@ -15,7 +15,20 @@
 - Parallel Old收集器：老年代收集器，多线程，多线程机制与Parallel Scavenge差不错，使用标记整理（与Serial Old不同，这里的整理是Summary（汇总）和Compact（压缩），汇总的意思就是将幸存的对象复制到预先准备好的区域，而不是像Sweep（清 理）那样清理废弃的对象）算法，在Parallel Old执行时，仍然需要暂停其它线程。Parallel Old在多核计算中很有用。
 - CMS（Concurrent Mark Sweep）收集器：老年代收集器，致力于获取最短回收停顿时间，使用标记清除算法，多线程，优点是并发收集（用户线程可以和GC线程同时工作），停顿小。
 
+###  GC类型 ###
+``` java
+ /* Not enough space for an "ordinary" Object to be allocated. */  
+ extern const GcSpec *GC_FOR_MALLOC;  
 
+/* Automatic GC triggered by exceeding a heap occupancy threshold. */  
+extern const GcSpec *GC_CONCURRENT;  
+
+/* Explicit GC via Runtime.gc(), VMRuntime.gc(), or SIGUSR1. */  
+extern const GcSpec *GC_EXPLICIT;  
+
+/* Final attempt to reclaim memory before throwing an OOM. */  
+extern const GcSpec *GC_BEFORE_OOM; 
+```
 ## Dalvik虚拟机 ##
 Dalvik虚拟机使用dex（Dalvik Executable）格式的文件，Java使用的是class文件。一个dex文件可以包含多个类，而class文件只能包含一个类。Dalvik虚拟机使用的指令时基于寄存器的，而Java虚拟机使用的指令集是基于堆栈的。
 
@@ -36,19 +49,6 @@ Dalvik是依靠一个Just-In-Time (JIT)编译器去解释字节码。开发者�
  - 如果调用函数dvmHeapSourceAllocAndGrow分配内存成功，则直接将分配得到的地址直接返回给调用者了。
  - 如果上一步内存分配还是失败，这时候就得出狠招了。再次调用函数gcForMalloc来执行GC。参数true表示要回收软引用对象引用的对象。
  - GC执行完毕，再次调用函数dvmHeapSourceAllocAndGrow进行内存分配。这是最后一次努力了，成功与事都到此为止。
-
- #### GC类型 ####
- /* Not enough space for an "ordinary" Object to be allocated. */  
- - extern const GcSpec *GC_FOR_MALLOC;  
-
-/* Automatic GC triggered by exceeding a heap occupancy threshold. */  
-- extern const GcSpec *GC_CONCURRENT;  
-
-/* Explicit GC via Runtime.gc(), VMRuntime.gc(), or SIGUSR1. */  
-- extern const GcSpec *GC_EXPLICIT;  
-
-/* Final attempt to reclaim memory before throwing an OOM. */  
-- extern const GcSpec *GC_BEFORE_OOM; 
 
 ## ART ##
 在应用安装时就预编译字节码到机器语言，这一机制叫Ahead-Of-Time (AOT）编译。
