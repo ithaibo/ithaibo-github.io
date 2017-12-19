@@ -63,7 +63,7 @@ Dalvik是依靠一个Just-In-Time (JIT)编译器去解释字节码。开发者�
 
 ### ART内存管理 ###
  - ART运行时堆划分为四个空间，分别是Image Space、Zygote Space、Allocation Space和Large Object Space。其中，Image，Zygote and Allocation Space是在地址上连续的空间，称为Continuous Space，而Large Object Space是一些离散地址的集合，用来分配一些大对象，称为Discontinuous Space。
- - 在Image Space和Zygote Space之间，隔着一段用来映射system@framework@boot.art@classes.oat文件的内存。而Image Space空间就包含了那些需要预加载的系统类对象。如果系统没有升级，那么以后每次系统启动只需要将文件system@framework@boot.art@classes.dex直接映射到内存即可，省去了创建各个类对象的时间。
+ - 在Image Space和Zygote Space之间，隔着一段用来映射system-framework-boot.art-classes.oat文件的内存。而Image Space空间就包含了那些需要预加载的系统类对象。如果系统没有升级，那么以后每次系统启动只需要将文件system-framework-boot.art-classes.dex直接映射到内存即可，省去了创建各个类对象的时间。
  - Zygote Space和Allocation Space与Dalvik虚拟机垃圾收集机制中的Zygote堆和Active堆的作用是一样的。Zygote Space在Zygote进程和应用程序进程之间共享的，而Allocation Space则是每个进程独占的。
 
 ** 总结：** 以空间换时间。
