@@ -54,6 +54,7 @@ Documents, Blogs, Books
      - [并发基础](java/concurrency/java_concurrency.md)
    - NIO
      - [NIO](java/NIO/Java_NIO.md)
+   - [java动态代理](java/proxy/java_dynamic_proxy.md)
    - encrypt
      - [Java常用加密算法](java/encrypt/Java常用加密算法.md)
    - [Java书单](java/Java书单.xlsx)
