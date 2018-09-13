@@ -35,7 +35,9 @@ boolean dispatchTouchEvent(MotionEvent event) {
 
 当一个点击事件产生后，它的传递过程如下：
 Activity，Window，View。View接收到事件后悔按照事件分发机制去分发事件。
-子ViewonTouchEvent返回false，父元素OnTouchEvent事件被调用，依次向上直到Activity。
+如果拦截了，自己处理
+不拦截，寻找可以处理的child，向其分发
+如果整个事件体系child都没有处理，将返回交给父级View的onTouchEvent处理（或window，window再向上抛给activity）；如果DOWN事件处理，其他没有处理，将交给Activity
 
 ## View事件传递机制 ##
 1. 一个事件序列是指：从down事件开始，move..., 最终以up事件结束。
