@@ -45,7 +45,7 @@ Activity，Window，View。View接收到事件后悔按照事件分发机制去�
 3. 某个View一旦拦截，那么事件序列都只能由它来处理，并且其onInterceptTouchEvent不会被再调用
 4. View开始处理事件，如果不消耗ACTION_DOWN事件，那么同一事件序列中其他事件都不会再交给它来处理，父元素的onTouchEvent将会被调用，后续事件将不能接收到
 5. 如果View不消耗除ACTION_DOWN以外的其他事件，父元素的onTouchEvent不会被调用，可以收到后续事件，未被消耗的事件将传递给Activity
-6. ViewGroup不拦截任何事件
+6. ViewGroup默认不拦截任何事件
 7. View没有onInterceptTouchEvent
 8. View的onTouchEvent默认都会被调用，除非clickable和longClickable同时为false
 9. View的enable不影响onTouchEvent的默认返回值
