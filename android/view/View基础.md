@@ -49,7 +49,7 @@ MotionEvent是手指在屏幕上接触所产生的事件。其类型有：
 TouchSlop是系统能识别的滑动的最小距离，该值在不同的系统中可能不同。滑动距离小于TouchSlop，系统不会认为这是一个滑动。
 android.view.ViewConfiguration.getScaledTouchSlop()方法可以获取该值。
 
-##VelocityTracker##
+## VelocityTracker
 VelocityTracker用户追踪手指在滑动过程中的速度，包括水平和竖直方法的速度。
 
 在MotionEvent产生后时，可以测速，其基本使用方法：
