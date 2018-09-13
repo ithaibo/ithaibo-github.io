@@ -12,6 +12,17 @@ onTouchEvent
 处理点击事件，在dispatchTouchEvent中调用
 
 三个方法的关系：
+``` java
+boolean dispatchTouchEvent(MotionEvent event) {
+    boolean consume = false;
+    if(onInterceptTouchEvent(event)) {
+        consume = onTouch(event);
+    } else {
+        consume = child.dispatchTouchEvent(event);
+    }
+    return consume;
+}
+```
 点击事件产生，调用dispatchTouchEvent
 如果 ViewGroup的onInterceptTouchEvent方法返回true 拦截该事件，然后call当前的ViewGroup的onTouchEvent方法；
 如果当前ViewGroup的onInterceptTouchEvent方法返回false， 不拦截该事件，该事件会继续传递给它的子元素，子元素的dispatchTouchEvent被调用，...
