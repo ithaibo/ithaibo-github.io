@@ -39,7 +39,7 @@ Activity，Window，View。View接收到事件后悔按照事件分发机制去�
 不拦截，寻找可以处理的child，向其分发
 如果整个事件体系child都没有处理，将返回交给父级View的onTouchEvent处理（或window，window再向上抛给activity）；如果DOWN事件处理，其他没有处理，将交给Activity
 
-## View事件传递机制 ##
+## View事件传递机制
 1. 一个事件序列是指：从down事件开始，move..., 最终以up事件结束。
 2. 正常情况下，一个事件序列只能被一个View拦截且消耗。通过特殊手段（如将一个View自己该处理的事件通过onTouchEvent强行传递给其他View）处理。
 3. 某个View一旦拦截，那么事件序列都只能由它来处理，并且其onInterceptTouchEvent不会被再调用
