@@ -40,8 +40,15 @@ Documents, Blogs, Books
      - [View滑动冲突](android/view/View滑动冲突.md)
      - [View基础](android/view/View基础.md)
      - [View事件的分发机制](android/view/View事件的分发机制.md)
+   - ViewStub
+     - [ViewStub的注意事项](android/ViewStub/ViewStub的注意事项.md)
    - Serialization
      - [序列化](android/ipc/序列化.md)
+   - IPC
+     - [ipc](android/ipc/ipc.md)
+     - [AIDL](android/ipc/aidl.md)
+     - [Messenger](android/ipc/messenger.md)
+     
  - java
    - Algorithms4thEdtionNotes
      - [Fundamentals](java/Algorithms4thEdtionNotes/1-Fundamentals.md)
@@ -49,9 +56,11 @@ Documents, Blogs, Books
      - [并发基础](java/concurrency/java_concurrency.md)
    - NIO
      - [NIO](java/NIO/Java_NIO.md)
+   - [java动态代理](java/proxy/java_dynamic_proxy.md)
    - encrypt
      - [Java常用加密算法](java/encrypt/Java常用加密算法.md)
    - [Java书单](java/Java书单.xlsx)
    - [Java集合类](java/collection/java_collection.md)
  - libraries
    - [lib.json](libraries/lib.json)
+   - [ARouter解析](libraries/ARouter解析.md)

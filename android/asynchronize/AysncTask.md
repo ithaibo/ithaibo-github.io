@@ -1,10 +1,10 @@
 #简介
 > AsyncTask是Android系统提供的异步方式，其优点在于在子线程执行任务，并将结果传递给主线程。
 
-###实现方式
+## 实现方式
 AsyncTask封装了Executor和Handler。
 
-###基本使用
+## 基本使用
 - AsyncTask类必须在主线程汇总加载
 - AsyncTask对象必须在主线程中创建
 - execute方法必须在主线程中调用
@@ -13,10 +13,10 @@ AsyncTask封装了Executor和Handler。
 
 **注：**本文并不是主要写如何使用AsyncTask，因此不作展开介绍。
 
-#兼容性
+# 兼容性
 本文主要介绍的是AsyncTask在不同的API版本中的区别。
 
-##并行还是串行
+## 并行还是串行
 下面的表格说明了AsyncTask的在不同API版本中，并行、串行情况：
 
  - Android1.5 ------------execute--------串行
@@ -25,7 +25,7 @@ AsyncTask封装了Executor和Handler。
 
 在Android3.0以后，如果要使用并行执行，那么需要调用executeOnExecutor方法。
 
-##线程池
+## 线程池
 在Android4.4以前，corePoolSize的值为5:
 
      private static final int CORE_POOL_SIZE = 5;
@@ -34,7 +34,7 @@ AsyncTask封装了Executor和Handler。
 
      private static final int CORE_POOL_SIZE = CPU_COUNT + 1;
 
-##线程池的调度
+## 线程池的调度
 设： nT为当前线程池的线程数量。
 
 - nT >= corePoolSize **且** workQueue未满，新任务直接加入workQueue
@@ -48,7 +48,7 @@ AsyncTask封装了Executor和Handler。
            \+ e.toString());
     }
 ```
-#AsyncTask工作原理
+# AsyncTask工作原理
 从AsyncTask的execute方法入手：
 ``` Java
 @MainThread

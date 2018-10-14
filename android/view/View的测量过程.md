@@ -1,4 +1,4 @@
-View的工作过程包含三个主要部分：measure, layout, draw。其中measure是完成View的大小测量，为后面的过程做准备。本位将主要介绍android中View的测量过程。
+View的工作过程包含三个主要部分：measure, layout, draw。其中measure是完成View的大小测量，为后面的过程做准备。这里介绍android中View的测量过程。
 View树的测量工作从ViewRootImpl.performTransform()开始(Talk is cheap, show me the code)：
 ``` Java
 private void performTraversals() {
