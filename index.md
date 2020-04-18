@@ -50,6 +50,8 @@ Documents, Blogs, Books
      - [Messenger](android/ipc/messenger.md)
      
  - java
+   - JVM
+     - [Java内存模型](java/JVM/内存模型/JMM.md)
    - Algorithms4thEdtionNotes
      - [Fundamentals](java/Algorithms4thEdtionNotes/1-Fundamentals.md)
    - Concurrency
