@@ -14,61 +14,9 @@
    - 不同的线程之间不能直接访问对方的工作内存
    - 线程间的变量值传递均需要通过主内存来完成
    - 虚拟机可能会让工作内存优先存储于寄存器和高速缓存中
-4. 内存可见性
-   - 让应用程序免于数据竞争干扰
-5. 原子性
-6. 有序性
-
-## happens-before规则
-用于描述2个操作的内存可见性。如果操作A happens-before操作B，那么操作A的执行结果将对操作B可见。
-
-1. 以下几种自动符合happens-before规则
-   - 程序次序规则
-     - 单线程内部，如果代码的字节码顺隐式符合happens-before
-   - 锁定规则
-     - 无论是在单线程还是多线程环境中，一个锁如果处于锁定状态，那么必须先执行unlock操作后才能进行unlock操作。
-   - 变量规则
-     - volatile保证了线程可见性
-   - 线程启动规则
-     - Thread对象的start()方法先行发生于此线程的每一个动作
-   - 线程中断规则
-     - 对线程interrupt()方法的调用先行发生于被中断线程的代码检测，直到到中断事件的发生
-   - 线程终结规则
-     - 线程中的所有操作都先行发生于对此线程的终止检测
-   - 对象终结规则
-     - 一个对象的初始化完成发生在它的finalize()方法开始前
-
-## 内存模型的应用
-1. volatile
-``` Java
-private volatile int value = 0;
-public void setValue(int value) {
-    this.value = value;
-}
-public int getValue() {
-    return this.value;
-}
-```
-
-2. synchronized
-``` Java
-private int value = 0;
-public void setValue(int value) {
-    synchronized {
-        this.value = value;
-    }
-}
-public int getValue() {
-    synchronized {
-        return this.value;
-    }
-}
-```
 
 ## 内存间交互操作[1]
-- 如何从主内存拷贝到工作内存
-- 如何从工作内存同步到主内存
-### 为了实现以上2种操作情况，Java内存模型定义了8种操作
+### Java内存模型定义了8种操作
 1. lock
     - 作用于祝内存的变量
     - 把一个变量标识为一条线程独占的状态
@@ -82,7 +30,7 @@ public int getValue() {
     - 作用于工作内存的变量，
     - 把read操作从主内存中得到的变量值放入工作内存的变量副本中
 5. use
-    - 作用域工作内存变量
+    - 作用于工作内存变量
     - 把工作内存中一个变量的值传递给执行引擎
     - 虚拟机遇到一个需要使用到变量的值的字节码指令时将会执行这个操作
 6. assign
@@ -110,6 +58,72 @@ public int getValue() {
 8. 对一个变量执行unlock操作前，必须把变量同步回主内存中（执行store write操作）
 
 ## volatile型变量的特殊规则
+volatile变量只保证可见性，在不符合以下2条规则的运算场景中，仍然需要加锁来保证原子性
+- 运算结果并不以来变量的当前值，或者能够确保只有单一的线程修改变量的值
+- 变量不需要与其他的状态变量共同参与不变约束
+
+volatile第二个语义是禁止指令重排序优化
+
+1. load read操作必须连续一起出现
+2. store write必须连续一起出现
+```
+//volatile V
+A  use   assign   //操作A对于变量V的use或assign操作
+F  load  store    //操作F对于变量V的load或store操作
+P  read  write    //操作P对于变量V的read或write操作
+//volatile W
+B  use   assign   //操作B对于变量W的use或assign操作
+G  load  store    //操作B对于变量W的load或store操作
+Q  read  write    //操作B对于变量W的read或write操作
+```
+如果A先于B，那么P先于Q
+
+
+## 对于long和double型变量的特殊规则
+对于64位的long double，允许虚拟机将没有被volatile修饰的64位数据的读写操作划分为2次32位的操作来进行。不保证load store read write这4个操作的原子性。
+
+
+## 原子性 Atomicity
+1. 基本数据类型的访问读写是具备原子性的
+2. Java提供来lock unlock操作来保证原子性
+3. synchronized块之间的操作也具备原子性
+   - 字节码指令monitorenter monitorexit
+
+
+## 可见性 Visibility
+当一个线程修改来共享变量的值，其他线程能够立即得知这个修改
+
+- volatile
+- synchronized
+- final：被final修饰的字段在构造器中一旦初始化完成，并且构造器没有把this引用传递出去，那在其他线程中就能看见final字段的值。
+
+## 有序性 Ordering
+1. 在本线程内观察，所有操作都是有序的；
+2. 如果在一个线程中观察另一个线程，所有的操作都是无序的
+
+Java提供来volatile和synchronized2个关键字来保证线程之间操作的有序性
+
+
+## happens-before规则
+用于描述2个操作的内存可见性。如果操作A happens-before操作B，那么操作A的执行结果将对操作B可见。
+
+1. 以下几种自动符合happens-before规则
+   - 程序次序规则
+     - 单线程内部，如果代码的字节码顺隐式符合happens-before
+   - 锁定规则
+     - 无论是在单线程还是多线程环境中，一个锁如果处于锁定状态，那么必须先执行unlock操作后才能进行unlock操作。
+   - 变量规则
+     - volatile保证了线程可见性
+   - 线程启动规则
+     - Thread对象的start()方法先行发生于此线程的每一个动作
+   - 线程中断规则
+     - 对线程interrupt()方法的调用先行发生于被中断线程的代码检测，直到到中断事件的发生
+   - 线程终结规则
+     - 线程中的所有操作都先行发生于对此线程的终止检测
+   - 对象终结规则
+     - 一个对象的初始化完成发生在它的finalize()方法开始前
+
+
 
 
 ## QA
